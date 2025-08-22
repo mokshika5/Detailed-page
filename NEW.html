@@ -47,6 +47,7 @@
     display: flex;
     gap: 12px;
     margin-bottom: 15px;
+    flex-wrap: wrap;
   }
   button {
     margin: 4px;
@@ -156,10 +157,14 @@
   .wrap {
       display: grid;
       gap: 24px;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
       max-width: 1330px;
        margin: 0 auto;
     }
+
+  @media (min-width: 900px) {
+    .wrap { grid-template-columns: repeat(2, 1fr); }
+  }
     
     .head{
       font-size: x-large;
@@ -181,7 +186,7 @@
 
     
 
-    @media (min-width: 400px){
+    @media (min-width: 768px){
          .share {
             padding: 2.5rem;
             margin: 20px;
@@ -195,10 +200,10 @@
             font-size: 1.7rem;
         }
         .chart {
-            gap: 95px;
+            gap: 48px;
         }
         .x-labels{
-            gap: 6.8rem;
+            gap: 3.5rem;
         }
         .descr{
           padding: 40px;
@@ -228,6 +233,7 @@
       max-width: 280px;
       height: 160px;
       padding: 10px;
+      gap: 12px;
     }
     .imgg{
       padding:10px ;  
@@ -240,7 +246,7 @@
         font-size: 12px
     }
     .share{
-        max-width: 320px;
+        width: 100%;
       padding: 1.5rem;
       margin-top: 20px;
     }
