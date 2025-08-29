@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WizeWealth - IPO</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#D5AD2A',secondary:'#4CAF50'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<link rel="icon" type="image/x-icon" href="/favicon.png" />
+<!-- External CSS -->
+<link rel="stylesheet" href="style.css">
+
+<style>
+  :root {
+    --bg:#121212;
+    --bar1: #1ecf62;
+    --bar2: #2563eb;
+    --bar3: #2465c6;
+    --bar-hover: #344b79;
+    --text: #e6edf6;
+    --c1: #1665e4;
+    --c2: #df1414;
+    --c3: #df9311;
+    --c4: #12a046;
+    --c5: #c7c1c1e7;
+  }
+  body {
+    background-color: #121212;
+    color: var(--text);
+    font-family: system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-bottom: 100px;
+
+  }
+  .btn-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  button {
+    margin: 4px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));background-color:  #0f1629;
+  }
+  button:hover {
+    background: var(--bar-hover);
+  }
+  .chart {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 100%;
+    height: 200px;
+    gap: 25px;
+  }
+  .bar {
+    flex: 1;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    transition: background 0.3s ease, height 0.3s ease;
+  }
+  .bar::after {
+  content: attr(data-value);
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -8px);
+  bottom: calc(100% + 10px);
+  background: #434745;
+  color: var(--text);
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  white-space: nowrap;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.bar.active {
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+  transform: translateY(-6px);
+}
+
+  .x-labels {
+      display: grid; 
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 2rem ;
+      padding:1rem;
+      color: var(--muted);
+      font-size: 20px;
+    }
+    
+      .sub-cap{
+        opacity: 0.8;
+      }
+    
+    .share {
+        background: #1e1e1e;
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        flex-direction: column;
+    }
+    .sharee {
+        background: #1e1e1e;
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        flex-direction: column;
+    }
+    .pie-chart {
+    width: min(70vw, 250px);
+    height: min(70vw, 250px);
+    border-radius: 50%;
+    background: conic-gradient(
+      var(--c1) 0% 15%,
+      var(--c2) 20% 35%,
+      var(--c3) 40% 55%,
+      var(--c4) 60% 80%,
+      var(--c5) 85% 95%,
+      var(--c1) 100%
+    );
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  }
+  .pie-chart::after {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 45%; height: 45%;
+    background:#121212;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .legend {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .swatch {
+    width: 14px; height: 14px;
+    border-radius: 3px;
+  }
+  .wrap {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1fr;
+      max-width: 1330px;
+       margin: 0 auto;
+    }
+    .boldd{
+      color:rgba(255, 215, 0, 0.8) ;
+    }
+    .subb{
+      padding-bottom: 1.5rem;
+      margin-left: 2.5vw;
+    }
+    table {
+      max-width: 70vw;
+      border: hidden;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+    }
+    th, td {
+      padding-left: 3vw;
+      padding-right: 3vw;
+      padding-top: 1vw;
+      text-align:left;
+    }
+    .tab{
+        border-right: 7px solid rgba(255, 215, 0, 0.8) ;
+        border-radius: 10px;
+    }
+    .head{
+      padding-left: 15px;
+      font-weight: 400;
+    }
+    .labl{
+      opacity: 0.7;
+    }
+    .tab2{
+      float: left;
+    }
+    
+
+  @media (min-width: 900px) {
+    .wrap { grid-template-columns: repeat(2, 1fr); }
+  }
+    
+    .head{
+      
+      font-size: x-large;
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    .descr{
+      opacity: .8;
+      display: flex;
+      justify-content: right;
+      color: var(--text);
+    }
+    .btn-group button.active {
+      border-radius: 10px;
+      color: rgba(255, 215, 0, 0.8);
+      padding: 2px;
+    }
+    
+
+
+    
+
+    @media (min-width: 768px){
+         .share {
+            padding: 2.5rem;
+            margin: 20px;
+         }
+         .sharee {
+            padding: 2.5rem;
+            margin: 20px;
+         }
+        .body{
+            font-family: system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            font-size: 1.7rem;
+        }
+        .chart {
+            gap: 6rem;
+            padding: 1rem;
+        }
+        .fund {
+            padding: 3vw;
+            max-width: 75vw;
+            display: flex;
+            margin: 3vw 10vw;
+            margin-top: 0px;
+
+        }
+        .x-labels{
+            gap: 7rem;
+        }
+        .descr{
+          padding: 1rem;
+          padding-right: 1rem;
+        }
+        .legend{
+          display:flex;
+          align-items: flex-start;
+          max-width: 200px;
+          padding-left: 40px;
+          margin-top: 4rem;
+        }
+        .side{
+          display: flex;
+          flex-direction: row;
+        }
+        
+        section{
+          background: #1e1e1e;
+          border-radius: 16px;
+          padding: 1.5rem;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+          flex-direction: column;
+          flex-wrap: wrap;
+          padding-top: 0.5rem;
+          margin: 5vw;
+          margin-bottom: 4vh;
+          max-width: 90rem;
+        }
+        .round-chart{
+          max-height: 66vh;
+        }
+        .SP{
+          margin-top: 4rem;
+        }
+        .pie-chart{
+          margin: 1rem;
+        }
+        .head{
+          margin-bottom: 1rem;
+          display: flex;
+          justify-content: center;
+        }
+        .btn-group{
+          gap: 2.5rem;
+          font-size: 1.2rem;
+        }
+        /* table{
+          max-width: 55vw;
+        } */
+        
+    }
+    @media (max-width:900px) {
+        .bar-chart{grid-column: span 12;} 
+         .round-chart{
+          grid-column: span 12;
+          margin-bottom: 90px;
+        }
+        
+    }
+  @media (max-width: 431px) {
+    .chart {
+      max-width: 280px;
+      height: 160px;
+      padding: 10px;
+      gap: 2rem;
+    }
+    .imgg{
+      padding:10px ;  
+    }
+    .bar::after {
+      font-size: 10px;
+      top: -14px;
+    }
+    .x-labels{ 
+        font-size: 12px
+      
+    }
+    .share{
+      width: 100%;
+      padding: 1.5rem;
+      margin-top: 2px;
+      margin-bottom: 10px;
+    }
+    .descr{
+      margin-top: 10px;
+    }
+    .sharee{
+      width: 100%;
+      margin-top: 2px;
+      margin-bottom: 10px;
+      background-color: #121212;
+      box-shadow: none;
+    }
+    .fund {
+      margin-top: 2px;
+      margin-bottom: 33px;
+      width: 100%;
+      flex-wrap: wrap;
+      font-size:x-small;
+      padding: 20px 5px 20px 5px ;
+    }
+    td{
+      padding: 5px;
+      margin: 0px;
+      padding-left: 0.6rem;
+      padding-right: 0.2rem;    
+    }
+    .tab{
+      border-color:#121212;
+      float: right;
+      padding: 0px;
+      padding-top: 5px;
+    }
+    .round-chart{
+      margin-bottom: 90px;
+    }
+    .tab2{
+      float: right;
+      padding: 0px;
+      padding-top: 5px;
+    }
+  }
+</style>
+
+</head>
+<body class="bg-black text-white flex flex-col min-h-screen w-full mx-auto">
+<!-- Desktop Top Navbar (md only) -->
+<nav class="hidden md:flex fixed top-0 left-0 w-full bg-[#121212] z-50 border-b border-gray-800 h-16 items-center px-8" style="justify-content: center;">
+  <div class="font-['Poppins'] flex flex-1 justify-end items-center space-x-24 max-w-xs">
+    <a href="index.html" class="text-gray-300 hover:text-primary transition text-lg">Home</a>
+    <a href="News.html" class="text-gray-300 hover:text-primary transition text-lg">News</a>
+  </div>
+  <div class="flex-none flex justify-center mx-44">
+    <span class="font-['Poppins'] text-primary text-2xl font-bold pointer-events-auto">WizeWealth</span>
+  </div>
+  <div class="font-['Poppins'] flex flex-1 justify-start items-center space-x-24 max-w-xs ml-0">
+    <a href="Invest.html" class="text-gray-300 hover:text-primary transition text-lg">Invest</a>
+    <a href="Wizebot.html" class="text-gray-300 hover:text-primary transition text-lg">WizeBot</a>
+  </div>
+</nav>
+<!-- Header (mobile only) -->
+<header class="fixed w-full top-0 bg-[#121212] z-10 p-4 border-b border-gray-800 md:hidden">
+    <h1 class="font-[Poppins] text-primary text-2xl font-bold text-center">Wize Wealth</h1>
+    </header>
+<!-- Main Content -->
+<main class="mt-16 flex-grow px-9 lg:px-8 bg-[#121212]">
+
+
+        <section class="space-y-4">
+            <div class="flex items-center space-x-4 mt-8">
+              <img src="https://www.chittorgarh.net/images/ipo/jyoti-global-logo.jpeg" alt="Logo" class="w-16 h-16 rounded-full">
+              <h1 class="text-3xl text-primary font-bold">Jupiter Wagons Ltd</h1>
+            </div>
+            <div class="subb">
+              <p class="boldd"><b>Deep Roots in Railway Engineering</b></p>
+              <p class="sub-cap">Mid Cap Company</p>
+            </div>
+        </section>
+
+        <!-- fundamental section -->
+        <div class="fundamentals">
+            <h1 class="head">Fundamentals</h1>
+            <div class="sharee fund">
+              <table>
+                <tbody>
+                  <tr>
+                    <td class="labl" colspan="1">Market Cap</td>
+                    <td class="tab" colspan="1">₹13,981Cr</td>
+                    <td class="labl" colspan="1">ROE</td>
+                    <td class="tab2" colspan="1">13.88%</td>
+                  </tr>
+                  <tr>
+                    <td class="labl" colspan="1">P/E Ratio (TTM)</td>
+                    <td class="tab" colspan="1">42.02</td>
+                    <td class="labl" colspan="1">EPS(TTM)</td>
+                    <td class="tab2" colspan="1">7.61</td>
+                  </tr>
+                  <tr>
+                    <td class="labl" colspan="1">P/B Ratio</td>
+                    <td class="tab" colspan="1">4.93</td>
+                    <td class="labl" colspan="1">Dividend Yield</td>
+                    <td class="tab2" colspan="1">0.31%</td>
+                  </tr>
+                  <tr>
+                    <td class="labl" colspan="1">Industry P/E</td>
+                    <td class="tab" colspan="1">35.60</td>
+                    <td class="labl" colspan="1">Book Value</td>
+                    <td class="tab2" colspan="1">64.88</td>
+                  </tr>
+                  <tr>
+                    <td class="labl" colspan="1">Dept to equity</td>
+                    <td class="tab" colspan="1">0.18</td>
+                    <td class="labl" colspan="1">Face Value</td>
+                    <td class="tab2" colspan="1">10</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+   
+  <div class="wrap">
+    <!-- Financial Performance section -->
+     <div>
+      <h1 class="head">Financial Performance</h1>
+    <div class="share bar-chart">
+  <div class="btn-group">
+    <button id="btnRevenue">Revenue</button>
+    <button id="btnProfit">Profit</button>
+    <button id="btnNetworth">NetWorth</button>
+  </div>
+  <div class="descr">All values are in Rs. Cr</div>
+  <br><br>
+  <div id="chartContainer" class="chart"></div>
+  <hr>
+  <div class="x-labels" aria-hidden="true">
+    
+    <span>2022</span><span>2023</span><span>2024</span><span>2025</span>
+    </div>
+  </div>
+     </div>
+  
+  <!--shareholding pie chart -->
+        <div class="SP">
+          <h1 class="head">Shareholding Pattern</h1>
+        <div class="share round-chart max-w-6xl mx-auto space-y-4">
+          <div class="side">
+            <div class="pie-chart"></div>
+        <div class="legend">
+          <div class="legend-item"><span class="swatch" style="background:var(--c1)"></span> Sales – 20%</div>
+          <div class="legend-item"><span class="swatch" style="background:var(--c2)"></span> Marketing – 25%</div>
+          <div class="legend-item"><span class="swatch" style="background:var(--c3)"></span> R&D – 20%</div>
+          <div class="legend-item"><span class="swatch" style="background:var(--c4)"></span> Support – 15%</div>
+          <div class="legend-item"><span class="swatch" style="background:var(--c5)"></span> Support – 20%</div>
+        </div>
+        </div>
+        </div>
+    </div>
+  
+</div>
+
+
+
+</main>
+<!-- Bottom Navigation (mobile only) -->
+<nav class="fixed bottom-0 w-full bg-[#1A1A1A] border-t border-gray-800 z-50 md:hidden">
+    <div class="font-['Poppins'] flex justify-around items-center h-16">
+    <a href="index.html" class="flex flex-col items-center justify-center w-1/4 h-full">
+    <div class="w-6 h-6 flex items-center justify-center">
+    <i class="ri-home-5-line text-gray-400 ri-lg"></i>
+    </div>
+    <span class="text-xs text-gray-400 mt-1">Home</span>
+    </a>
+    <a href="News.html" class="flex flex-col items-center justify-center w-1/4 h-full">
+    <div class="w-6 h-6 flex items-center justify-center">
+    <i class="ri-newspaper-line text-gray-400 ri-lg"></i>
+    </div>
+    <span class="text-xs text-gray-400 mt-1">News</span>
+    </a>
+    <a href="Invest.html" class="flex flex-col items-center justify-center w-1/4 h-full">
+    <div class="w-6 h-6 flex items-center justify-center">
+    <i class="ri-line-chart-line text-gray-400 ri-lg"></i>
+    </div>
+    <span class="text-xs text-gray-400 mt-1">Invest</span>
+    </a>
+    <a href="Wizebot.html" class="flex flex-col items-center justify-center w-1/4 h-full">
+    <div class="w-6 h-6 flex items-center justify-center">
+    <i class="ri-message-3-line text-gray-400 ri-lg"></i>
+    </div>
+    <span class="text-xs text-gray-400 mt-1">WizeBot</span>
+    </a>
+    </div>
+    </nav>
+
+  <!-- External JS -->
+<script>
+    
+  const chartContainer = document.getElementById("chartContainer");
+const btnRevenue = document.getElementById("btnRevenue");
+const btnProfit = document.getElementById("btnProfit");
+const btnNetworth = document.getElementById("btnNetworth");
+const buttons = [btnRevenue, btnProfit, btnNetworth];
+
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    buttons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    if (btn === btnRevenue) renderGraph(revenue);
+    else if (btn === btnProfit) renderGraph(profit);
+    else renderGraph(networth);
+  });
+});
+
+btnRevenue.classList.add("active");
+  const revenue = [
+  { value: 1200, color: "var(--bar1)" },
+  { value: 1400, color: "var(--bar1)" },
+  { value: 900,  color: "var(--bar1)" },
+  { value: 1800, color: "var(--bar1)" },
+];
+
+const profit = [
+  { value: 300, color: "var(--bar1)" },
+  { value: 250, color: "var(--bar1)" },
+  { value: 400, color: "var(--bar1)" },
+  { value: 350, color: "var(--bar1)" },
+];
+
+const networth = [
+  { value: 5000, color: "var(--bar1)" },
+  { value: 5500, color: "var(--bar1)" },
+  { value: 6000, color: "var(--bar1)" },
+  { value: 6500, color: "var(--bar1)" },
+];
+
+  function renderGraph(data) {
+  const maxValue = Math.max(...data.map(d => d.value));
+  chartContainer.innerHTML = data.map(item => {
+    const heightPct = (item.value / maxValue) * 100;
+    return `<div class="bar" style="height:${heightPct}%; background:${item.color};" data-value="${item.value}"></div>`;
+  }).join("");
+}
+  
+
+  // Show graph 1 by default
+  renderGraph(revenue);
+</script></body>
+</html
