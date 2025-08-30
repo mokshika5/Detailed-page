@@ -54,9 +54,9 @@
     transition: background 0.3s ease;
     background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));background-color:  #0f1629;
   }
-  /*  button:hover {
-      background: var(--bar-hover);
-    } */
+  /* button:hover {
+    background: var(--bar-hover);
+  } */
   .chart {
     display: flex;
     justify-content: space-around;
@@ -306,9 +306,6 @@
           gap: 2.5rem;
           font-size: 1.2rem;
         }
-        /* table{
-          max-width: 55vw;
-        } */
         
     }
     @media (max-width:900px) {
@@ -367,10 +364,10 @@
       padding-right: 0.2rem;    
     }
     .tab{
-      border-color:#121212;
       float: right;
       padding: 0px;
       padding-top: 5px;
+      border-right: 25px solid #121212 ;
     }
     .round-chart{
       margin-bottom: 90px;
@@ -381,9 +378,15 @@
       padding-top: 5px;
     }
     table{
-      max-width: 85vw;
+      max-width: 90vw;
+      display: flex;
+      justify-content: center;
+    }
+    .labl{
+      padding-left: 0px;
     }
   }
+  
 </style>
 
 </head>
@@ -589,6 +592,4 @@ const networth = [
   // Show graph 1 by default
   renderGraph(revenue);
 </script></body>
-
-</html
-
+</html>
